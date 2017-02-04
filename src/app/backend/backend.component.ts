@@ -7,7 +7,7 @@ import {BackendService} from "./backend.service";
 @Component({
   selector: 'backend',
   template: `
-  <button (click)="onHostGet()">Get host list</button><br/>
+  <button  md-raised-button (click)="onHostGet()">Get host list</button><br/>
   
   
 <md-list>
