@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {BackendService} from "../backend/backend.service";
-import {forEach} from "@angular/router/src/utils/collection";
+import {Observable} from 'rxjs/Rx';
 
 @Component({
   selector: 'overall',
@@ -16,12 +16,14 @@ export class OverallComponent {
 
   constructor(private _httpService: BackendService) {}
 
-  ngOnInit(){
-    this._httpService.getAll('livesynthesis')
 
-      .subscribe(
-        data => this.parseLiveState(data['_items'])
-      );
+  ngOnInit() {
+    Observable.interval(30000)
+      .startWith(1)
+      .mergeMap(() => this._httpService.getAll('livesynthesis'))
+        .subscribe(
+          data => this.parseLiveState(data['_items'])
+        )
   }
 
   parseLiveState(data) {
