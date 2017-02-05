@@ -1,0 +1,18 @@
+host list
+
+<div>
+  <ngx-datatable
+    class="material"
+    [rows]="rows"
+    [columns]="[{name:'name'},{name:'address'},{name:'lsstate'}]"
+    [columnMode]="'force'"
+    [headerHeight]="50"
+    [footerHeight]="50"
+    [rowHeight]="'auto'"
+    [externalPaging]="true"
+    [count]="count"
+    [offset]="offset"
+    [limit]="limit"
+    (page)='onPage($event)'>
+  </ngx-datatable>
+</div>

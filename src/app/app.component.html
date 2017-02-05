@@ -1,10 +1,20 @@
 <md-toolbar>
   <span>{{title}}</span>
+  &nbsp;&nbsp;&nbsp;
+  <a routerLink="/hosts" routerLinkActive="active">
+    <fa name="server" size="1x"></fa>
+  </a>
+  &nbsp;
+  <fa name="eye" size="1x"></fa>
+
 
   <md-toolbar-row>
     <overall></overall>
   </md-toolbar-row>
 </md-toolbar>
 
+<router-outlet></router-outlet>
+
+<br><br><br><hr>
 <backend></backend>
 
