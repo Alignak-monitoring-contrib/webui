@@ -1,0 +1,19 @@
+.state_critical {
+  color: #e74c3c;
+}
+
+.state_ok {
+  color: #27ae60;
+}
+
+.state_acknowledge {
+  color: #95a5a6;
+}
+
+.state_unreachable {
+  color: #e67e22;
+}
+
+.state_downtime {
+  color: #9b59b6;
+}

@@ -40,6 +40,10 @@ export class BackendService {
 
     let headers = new Headers();
     headers.append("Authorization", "Basic " + btoa(this.token + ":"));
+    //headers.append("Cache-control", "no-cache");
+    //headers.append('Cache-control', 'no-store');
+    //headers.append('Expires', '0');
+    //headers.append("Pragma", "no-cache");
     return this._http.get(this.backend_url + '/' + endpoint, {headers: headers})
       .map(res => res.json());
 

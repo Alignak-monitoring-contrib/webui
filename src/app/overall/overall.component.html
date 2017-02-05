@@ -1,3 +1,28 @@
-overall: (hosts) {{host_up}} {{host_down}} {{host_unreachable}} {{host_acknowledged}} {{host_in_downtime}}
-(services) todo
+overall: hosts:
+<span class="state_ok">
+  <fa name="server" size="1x"></fa>
+  {{host_up}}
+</span>
 
+<span class="state_critical">
+  <fa name="server" size="1x"></fa>
+  {{host_down}}
+</span>
+
+<span class="state_unreachable">
+  <fa name="server" size="1x"></fa>
+  {{host_unreachable}}
+</span>
+
+<span class="state_acknowledge">
+  <fa name="server" size="1x"></fa>
+  {{host_acknowledged}}
+</span>
+
+<span class="state_downtime">
+  <fa name="server" size="1x"></fa>
+  {{host_in_downtime}}
+</span>
+
+services: {{service_ok}} {{service_warning}} {{service_critical}} {{service_unknown}} {{service_unreachable}}
+{{service_acknowledged}} {{service_in_downtime}}
