@@ -2,7 +2,7 @@
  * Created by ddurieux on 2/4/17.
  */
 import {Injectable} from '@angular/core';
-import {Http,Headers} from "@angular/http";
+import {Http,Headers,URLSearchParams} from "@angular/http";
 import 'rxjs/add/operator/map'
 
 @Injectable()
@@ -26,7 +26,9 @@ export class BackendService {
 
     let headers = new Headers();
     headers.append("Authorization", "Basic " + btoa(this.token + ":"));
-    return this._http.get(this.backend_url + '/host', {headers: headers})
+    let params = new URLSearchParams();
+    params.set('where', '{"_is_template":false}');
+    return this._http.get(this.backend_url + '/host', {headers: headers, search: params})
       .map(res => res.json());
 
   }
