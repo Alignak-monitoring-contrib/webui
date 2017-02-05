@@ -7,12 +7,26 @@ import 'rxjs/add/operator/map'
 
 @Injectable()
 export class BackendService {
+  token = '1484558366922-bcf7ccf1-7238-487b-abd9-30ced7e426fb';
+  backend_url = 'http://demo.alignak.net:5011';
+
   constructor(private _http: Http) {}
 
+
+  doLogin() {
+    this._http.post(this.backend_url + '/login', {username: 'admin', password: 'admin'})
+      .map(res => res.json())
+      .subscribe(token => this.token = token['token']);
+  }
+
   getHosts() {
+    if (this.token == '') {
+      this.doLogin();
+    }
+
     let headers = new Headers();
-    headers.append("Authorization", "Basic " + btoa("1486157026002-b9151cd2-cebd-458b-b07a-2e14f0db2999:"));
-    return this._http.get('http://127.0.0.1:5000/host', {headers: headers})
+    headers.append("Authorization", "Basic " + btoa(this.token + ":"));
+    return this._http.get(this.backend_url + '/host', {headers: headers})
       .map(res => res.json());
 
   }
