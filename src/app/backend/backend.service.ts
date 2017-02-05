@@ -33,6 +33,18 @@ export class BackendService {
 
   }
 
+  getAll(endpoint) {
+    if (this.token == '') {
+      this.doLogin();
+    }
+
+    let headers = new Headers();
+    headers.append("Authorization", "Basic " + btoa(this.token + ":"));
+    return this._http.get(this.backend_url + '/' + endpoint, {headers: headers})
+      .map(res => res.json());
+
+  }
+
   // need add getpage, getitem, getall, postitem, patchitem, deleteall, deleteitem
 
 }

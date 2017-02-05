@@ -7,12 +7,14 @@ import {MaterialModule} from '@angular/material';
 import { AppComponent } from './app.component';
 import {BackendComponent} from './backend/backend.component';
 import {BackendService} from "./backend/backend.service";
+import {OverallComponent} from './overall/overall.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    BackendComponent
+    BackendComponent,
+    OverallComponent
   ],
   imports: [
     BrowserModule,
