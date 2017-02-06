@@ -11,6 +11,7 @@ export class HostListComponent {
   count: number = 0;
   offset: number = 0;
   limit: number = 10;
+  sort = 'name';
 
   constructor(private _httpService: BackendService) {}
 
@@ -19,11 +20,20 @@ export class HostListComponent {
   }
 
   page(offset, limit) {
-    console.log(offset);
-    this._httpService.getPage('host', '{"_is_template":false}', null, null, null, (offset + 1), limit)
+    this._httpService.getPage('host', '{"_is_template":false}', null, null, this.sort, (offset + 1), limit)
       .subscribe(
         data => this.parsePage(data)
       );
+  }
+
+  onSort(event) {
+    console.log('Sort Event', event);
+    if (event['sorts'][0]['dir'] == 'asc') {
+      this.sort = event['sorts'][0]['prop'];
+    } else {
+      this.sort = '-' + event['sorts'][0]['prop'];
+    }
+    this.page(this.offset, this.limit);
   }
 
   parsePage(data) {
@@ -32,7 +42,7 @@ export class HostListComponent {
 
     let i = (data['_meta']['page'] - 1) * data['_meta']['max_results'];
     for (var item of data['_items']) {
-      rows[i] = {name: item['name'], address: item['address'], lsstate: item['ls_state']};
+      rows[i] = {name: item['name'], address: item['address'], ls_state: item['ls_state']};
       i++;
     }
     this.rows = rows;

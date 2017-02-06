@@ -4,7 +4,7 @@ host list
   <ngx-datatable
     class="material"
     [rows]="rows"
-    [columns]="[{name:'name'},{name:'address'},{name:'lsstate'}]"
+    [columns]="[{name:'name'},{name:'address'},{prop:'ls_state',name:'state'}]"
     [columnMode]="'force'"
     [headerHeight]="50"
     [footerHeight]="50"
@@ -13,6 +13,7 @@ host list
     [count]="count"
     [offset]="offset"
     [limit]="limit"
-    (page)='onPage($event)'>
+    (page)='onPage($event)'
+    (sort)='onSort($event)'>
   </ngx-datatable>
 </div>

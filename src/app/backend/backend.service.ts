@@ -55,7 +55,8 @@ export class BackendService {
     let headers = new Headers();
     headers.append("Authorization", "Basic " + btoa(this.token + ":"));
     // define a cache of 10 seconds
-    headers.append('Cache-Control', 'max-age=10');
+    //headers.append('Cache-Control', 'max-age=10');
+    headers.append('Cache-Control', 'max-age=0');
     // manage params
     let params: URLSearchParams = new URLSearchParams();
     if (where != null) {
