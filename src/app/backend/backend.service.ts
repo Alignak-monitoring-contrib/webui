@@ -8,7 +8,7 @@ import 'rxjs/add/operator/map'
 @Injectable()
 export class BackendService {
   token = '1484558366922-bcf7ccf1-7238-487b-abd9-30ced7e426fb';
-  backend_url = 'http://demo.alignak.net:5011';
+  backend_url = 'http://demo.alignak.net:5010';
 
   constructor(private _http: Http) {}
 
@@ -42,6 +42,7 @@ export class BackendService {
     headers.append("Authorization", "Basic " + btoa(this.token + ":"));
     //headers.append("Cache-control", "no-cache");
     //headers.append('Cache-control', 'no-store');
+    headers.append('Cache-Control', 'max-age=20')
     //headers.append('Expires', '0');
     //headers.append("Pragma", "no-cache");
     return this._http.get(this.backend_url + '/' + endpoint, {headers: headers})
