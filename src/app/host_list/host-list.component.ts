@@ -19,8 +19,8 @@ export class HostListComponent {
   }
 
   page(offset, limit) {
-    // todo: manage pages
-    this._httpService.getHosts()
+    console.log(offset);
+    this._httpService.getPage('host', '{"_is_template":false}', null, null, null, (offset + 1), limit)
       .subscribe(
         data => this.parsePage(data)
       );
@@ -28,11 +28,9 @@ export class HostListComponent {
 
   parsePage(data) {
     this.count = data['_meta']['total'];
-    console.log(this.count);
+    let rows = [...this.rows];
 
-    let rows = [];
-
-    let i = 0;
+    let i = (data['_meta']['page'] - 1) * data['_meta']['max_results'];
     for (var item of data['_items']) {
       rows[i] = {name: item['name'], address: item['address'], lsstate: item['ls_state']};
       i++;
