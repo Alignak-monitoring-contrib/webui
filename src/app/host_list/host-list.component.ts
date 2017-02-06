@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { BackendService } from "../backend/backend.service";
 
 @Component({
@@ -7,16 +7,38 @@ import { BackendService } from "../backend/backend.service";
   providers: [ BackendService ]
 })
 export class HostListComponent {
+  @ViewChild('stateTpl') stateTpl: TemplateRef<any>;
   rows = [];
   count: number = 0;
   offset: number = 0;
   limit: number = 10;
   sort = 'name';
+  columns = [];
 
   constructor(private _httpService: BackendService) {}
 
+
   ngOnInit() {
     this.page(this.offset, this.limit);
+
+    this.columns = [
+      {
+        name: 'Status',
+        prop: 'ls_state',
+        width: 80,
+        maxWidth: 80,
+        canAutoResize: false,
+        cellTemplate: this.stateTpl
+      },
+      {
+        name:'Name',
+        prop: 'name'
+      },
+      {
+        name:'Address',
+        prop: 'address'
+      }
+    ];
   }
 
   page(offset, limit) {
@@ -42,7 +64,11 @@ export class HostListComponent {
 
     let i = (data['_meta']['page'] - 1) * data['_meta']['max_results'];
     for (var item of data['_items']) {
-      rows[i] = {name: item['name'], address: item['address'], ls_state: item['ls_state']};
+      let state = 'ok';
+      if (item['ls_state'] == 'DOWN') {
+        state = 'critical';
+      }
+      rows[i] = {name: item['name'], address: item['address'], ls_state: state};
       i++;
     }
     this.rows = rows;

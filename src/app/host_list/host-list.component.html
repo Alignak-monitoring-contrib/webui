@@ -4,8 +4,8 @@ host list
   <ngx-datatable
     class="material"
     [rows]="rows"
-    [columns]="[{name:'name'},{name:'address'},{prop:'ls_state',name:'state'}]"
-    [columnMode]="'force'"
+    [columns]="columns"
+    [columnMode]="'standard'"
     [headerHeight]="50"
     [footerHeight]="50"
     [rowHeight]="'auto'"
@@ -15,5 +15,12 @@ host list
     [limit]="limit"
     (page)='onPage($event)'
     (sort)='onSort($event)'>
+
+    <template #stateTpl let-row="row" let-value="value">
+          <span class="state_{{value}}">
+            <fa name="server" size="1x"></fa>
+          </span>
+    </template>
+
   </ngx-datatable>
 </div>
